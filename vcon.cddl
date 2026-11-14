@@ -584,8 +584,8 @@ uuid_value_type = tstr .regexp
 ; HTTPS URL (Section 2.4.1)
 url_value_type = tstr .regexp "https://.+"
 
-; Signed Form of vCon Object
-;___________________________
+; Signed Form of vCon Object (Section 6.2)
+;_________________________________________
 
 signed_vcon_type = {
     payload: base64url_value_type,
@@ -593,7 +593,7 @@ signed_vcon_type = {
     * $$signed-ext
   }
 
-; Signature Object
+; Signature Object (Section 6.2.1)
 signature_object_type = {
     header: signed_header_object_type,
     ; present when the JWS Protected Header is not empty
@@ -602,7 +602,7 @@ signature_object_type = {
     * $$signature-ext
   }
 
-; Header Object of the signed form
+; Header Object of the signed form (Section 6.2.2)
 ; MUST include at least one of x5c or x5u.
 ; Other JWS header parameters MAY be present.
 ; Not enforced by this CDDL, as the JWS Protected Header is an
