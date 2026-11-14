@@ -77,35 +77,36 @@
 
 vcon = unsigned_vcon_type / signed_vcon_type / encrypted_vcon_type
 
-; Unsigned Form of vCon Object
-;_____________________________
+; Unsigned Form of vCon Object (Section 4)
+;_________________________________________
 
 ; Not enforced by this CDDL:
 ; - At least one Session Object MUST exist if the events array or
-;   the dialog array contain Objects.
+;   the dialog array contain Objects (Section 4.1.10).
 ; - An index MUST refer to an Object which exists in the array
 ;   that it indexes.
 unsigned_vcon_type = {
-    ; DEPRECATED
+    ; DEPRECATED (Section 4.1.1)
     ? "vcon": "0.5.0",
-    uuid: uuid_value_type,
-    ? extensions: [* tstr],
-    ? critical: [* tstr],
-    created_at: date_type,
-    ? updated_at: date_type,
-    ? subject: tstr,
+    uuid: uuid_value_type,                   ; Section 4.1.2
+    ? extensions: [* tstr],                  ; Section 4.1.3
+    ? critical: [* tstr],                    ; Section 4.1.4
+    created_at: date_type,                   ; Section 4.1.5
+    ? updated_at: date_type,                 ; Section 4.1.6
+    ? subject: tstr,                         ; Section 4.1.7
     ; redacted_from and amended_from are mutually exclusive
-    ? ( redacted_from: redacted_from_object_type //
-        amended_from: amended_from_object_type ),
+    ? ( redacted_from: redacted_from_object_type // ; Section 4.1.8
+        amended_from: amended_from_object_type ), ; Section 4.1.9
+    ; Section 4.1.16
     ? redacted_strings: [* redacted_string_object_type],
     ; at least one of parties, dialog, analysis or attachments
-    ; SHOULD be present
-    ? sessions: [* session_object_type],
-    ? parties: [* party_object_type],
-    ? events: [* event_object_type],
-    ? dialog: [* dialog_object_type],
-    ? analysis: [* analysis_object_type],
-    ? attachments: [* attachment_object_type],
+    ; SHOULD be present (Section 4)
+    ? sessions: [* session_object_type],     ; Section 4.1.10
+    ? parties: [* party_object_type],        ; Section 4.1.11
+    ? events: [* event_object_type],         ; Section 4.1.12
+    ? dialog: [* dialog_object_type],        ; Section 4.1.13
+    ? analysis: [* analysis_object_type],    ; Section 4.1.14
+    ? attachments: [* attachment_object_type], ; Section 4.1.15
     * $$vcon-ext
   }
 
