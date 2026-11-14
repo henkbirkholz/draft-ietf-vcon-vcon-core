@@ -13,7 +13,8 @@
 ; which defines it is used together with this CDDL.  Failing
 ; validation against this CDDL is not by itself a reason to
 ; reject a vCon.  The draft defines how parameters and values
-; which are not recognized are handled (see Extending vCon).
+; which are not recognized are handled (see Extending vCon in
+; Section 2.5).
 ;
 ; Extension points
 ; ----------------
@@ -69,10 +70,10 @@
 ;
 ; The header objects of the signed and encrypted forms have no
 ; socket.  They are open, as any JWS or JWE header parameter MAY
-; be present in them.
+; be present in them (Sections 6.2.2, 6.3.1 and 6.3.3).
 
-; A vCon JSON object is in one of three forms: unsigned, signed
-; (JWS) or encrypted (JWE).
+; A vCon JSON object is in one of three forms (Section 3):
+; unsigned, signed (JWS) or encrypted (JWE).
 
 vcon = unsigned_vcon_type / signed_vcon_type / encrypted_vcon_type
 
