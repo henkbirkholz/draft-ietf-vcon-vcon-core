@@ -424,20 +424,20 @@ dialog_incomplete_type = (
     disposition: disposition_value_type      ; Section 4.5.8
   )
 
-; Attachment Object
+; Attachment Object (Section 4.6)
 attachment_object_type = {
-    ? purpose: tstr,
-    start: date_type,
-    party: party_index_type,
+    ? purpose: tstr,                         ; Section 4.6.1
+    start: date_type,                        ; Section 4.6.2
+    party: party_index_type,                 ; Section 4.6.3
     ; at least one of dialog or session MUST be present
-    ( ( dialog: dialog_index_type,
-        ? session: session_index_or_list_type ) //
-      session: session_index_or_list_type ),
+    ( ( dialog: dialog_index_type,           ; Section 4.6.4
+        ? session: session_index_or_list_type ) // ; Section 4.6.5
+      session: session_index_or_list_type ), ; Section 4.6.5
     ; mediatype MUST be present for inline content; not required
     ; when Attachment Content is absent
-    ? mediatype: media_type_value_type,
-    ? filename: tstr,
-    ; Attachment Content SHOULD be present;
+    ? mediatype: media_type_value_type,      ; Section 4.6.6
+    ? filename: tstr,                        ; Section 4.6.7
+    ; Attachment Content (Section 4.6.8) SHOULD be present;
     ; body or url MAY be absent if redacted
     ? file_content_type,
     * $$attachment-ext
