@@ -474,6 +474,7 @@ file_content_type = ( inline_content_type //
 
 ; body is any JSON value when encoding is "json";
 ; otherwise body is a string.
+; An empty string body MAY be provided without encoding.
 ; A vCon extension which adds an encoding value also defines the
 ; form of body for that encoding.
 inline_content_type = (
@@ -481,6 +482,7 @@ inline_content_type = (
       body: any ) //
     ( encoding: "none" / "base64url",
       body: tstr ) //
+    ( body: "" ) //
     $$encoding-ext
   )
 
