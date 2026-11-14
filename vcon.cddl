@@ -113,11 +113,11 @@ unsigned_vcon_type = {
 ; Object and multi-parameter types
 ;_________________________________
 
-; Redacted_from Object
+; Redacted_from Object (Section 4.1.8.1)
 ; uuid SHOULD be provided.
 ; content_hash MUST be provided if url is provided.
 ; type has the same set of values as the type parameter of the
-; Redacted_string Object.
+; Redacted_string Object (Section 4.8.2).
 redacted_from_object_type = {
     ? uuid: uuid_value_type,
     type: tstr,
@@ -126,7 +126,7 @@ redacted_from_object_type = {
     * $$redacted-from-ext
   }
 
-; Amended_from Object
+; Amended_from Object (Section 4.1.9.1)
 ; uuid is optional only if an external reference is provided.
 ; content_hash MUST be provided if url is provided.
 amended_from_object_type = {
@@ -136,18 +136,19 @@ amended_from_object_type = {
     * $$amended-from-ext
   }
 
-; Redacted_string Object
+; Redacted_string Object (Section 4.8)
 ; Not enforced by this CDDL:
 ; - Each "__REDACTED_REF_#" substring in the vCon has a
-;   Redacted_string Object with a matching ref value.
+;   Redacted_string Object with a matching ref value
+;   (Section 4.1.16).
 redacted_string_object_type = {
-    ref: 1..99999,
+    ref: 1..99999,                           ; Section 4.8.1
     ; type is an extensible string enumeration: "GOVT_ID_NUM",
     ; "FIN_ID_NUM", "MED_ID_NUM", "BIOMETRIC", "AUTH_DATA",
     ; "CONTACT_INFO", "LOC_INFO", "EMPL_INFO", "BELIEF_INFO",
     ; "UNSPECIFIED" or another value; absent is "UNSPECIFIED"
-    ? type: tstr,
-    ? orig: tstr,
+    ? type: tstr,                            ; Section 4.8.2
+    ? orig: tstr,                            ; Section 4.8.3
     * $$redacted-string-ext
   }
 
