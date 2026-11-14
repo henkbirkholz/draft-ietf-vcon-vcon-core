@@ -471,19 +471,21 @@ analysis_object_type = {
     * $$analysis-ext
   }
 
-; Inline Files and Externally Referenced Files
-;_____________________________________________
+; Inline Files (Section 2.3) and
+; Externally Referenced Files (Section 2.4)
+;___________________________________________
 
 ; When the url of externally referenced content has been
-; redacted, the content_hash MAY remain without the url.
+; redacted, the content_hash MAY remain without the url
+; (Sections 4.5.7, 4.6.8 and 4.7.11).
 file_content_type = ( inline_content_type //
     external_content_type // redacted_content_type )
 
 ; body is any JSON value when encoding is "json";
-; otherwise body is a string.
+; otherwise body is a string (Sections 2.3.1 and 2.3.2).
 ; An empty string body MAY be provided without encoding.
 ; When the body has been redacted, the encoding MAY remain
-; without the body.
+; without the body (Sections 4.5.7, 4.6.8 and 4.7.11).
 ; A vCon extension which adds an encoding value also defines the
 ; form of body for that encoding.
 inline_content_type = (
@@ -496,15 +498,15 @@ inline_content_type = (
   )
 
 external_content_type = (
-    url: url_value_type,
-    content_hash: content_hash_type
+    url: url_value_type,                     ; Section 2.4.1
+    content_hash: content_hash_type          ; Section 2.4.2
   )
 
 redacted_content_type = (
-    content_hash: content_hash_type
+    content_hash: content_hash_type          ; Section 2.4.2
   )
 
-; SessionId Object
+; SessionId Object (Sections 2.2, 4.2.5 and 4.5.9)
 ; The empty object is the placeholder for a party with no session id.
 session_id_object_type = {
     ? "local": uuid_value_type,
