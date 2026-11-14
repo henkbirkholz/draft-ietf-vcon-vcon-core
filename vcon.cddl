@@ -42,7 +42,7 @@
 ; socket adds an encoding value along with the form of the body
 ; parameter for that encoding.  For example:
 ;
-;     $$dialog-type-ext //= example_dialog_type
+;     $$dialog-type-ext //= ( example_dialog_type )
 ;     example_dialog_type = (
 ;         type: "example",
 ;         dialog_common_type,
