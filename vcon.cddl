@@ -520,7 +520,7 @@ session_id_parameter_type =
 ; Basic types and single parameter types
 ;_______________________________________
 
-; RFC3339 date string
+; RFC3339 date string (Section 2.2)
 ; The pattern is in two parts only to keep the lines short.  The
 ; first 19 characters are the date, "T" and the time.  The rest is
 ; the optional fraction of a second and the time zone offset.
@@ -531,21 +531,22 @@ date_offset_type = tstr .regexp
     ".{19}([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})"
 
 ; String token of the form: hash algorithm, "-", Base64Url encoded
-; digest, e.g. "sha512-..."
+; digest, e.g. "sha512-..." (Section 2.2)
 content_hash_value_type = tstr .regexp "[a-z0-9]+-[A-Za-z0-9_-]+"
 
 content_hash_type =
     content_hash_value_type / [* content_hash_value_type]
 
 ; Duration in seconds; MUST be non-negative
+; (Sections 4.2.2 and 4.5.3)
 duration_type = uint / float
 
-; Dialog Object disposition values
+; Dialog Object disposition values (Section 4.5.8)
 disposition_value_type = "no-answer" / "congestion" / "failed" /
     "busy" / "hung-up" / "voicemail-no-message" /
     $disposition-ext
 
-; Media type of the form: type "/" subtype
+; Media type of the form: type "/" subtype (Section 2.2)
 media_type_value_type = tstr .regexp
     "[A-Za-z0-9!#$&^_.+-]+/[A-Za-z0-9!#$&^_.+-]+(;.*)?"
 
@@ -572,7 +573,7 @@ analysis_index_or_list_type =
 
 ; Index or indices of parties; the nested array form is used for
 ; multi-channel recordings with one entry per channel; null is the
-; placeholder for an unused channel.
+; placeholder for an unused channel (Section 4.5.4).
 dialog_parties_type = party_index_type /
     [* ( party_index_type / [* party_index_type] / null )]
 
@@ -580,7 +581,7 @@ dialog_parties_type = party_index_type /
 uuid_value_type = tstr .regexp
     "[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}"
 
-; HTTPS URL
+; HTTPS URL (Section 2.4.1)
 url_value_type = tstr .regexp "https://.+"
 
 ; Signed Form of vCon Object
