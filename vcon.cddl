@@ -186,9 +186,9 @@ session_reference_object_type = {
 session_reference_type_value_type = "child" / "peer" /
     "precursor" / "breakout" / $session-reference-type-ext
 
-; Event Object
+; Event Object (Section 4.3)
 ; The type selects which parameters apply (see Event Object
-; Parameter Applicability by Type).
+; Parameter Applicability by Type in Section 4.3.1.5).
 ; A vCon extension adds an Event Object type through the
 ; event-type-ext socket and adds parameters to all Event Object
 ; types through the event-ext socket.
@@ -210,74 +210,75 @@ event_object_type = {
 
 ; Parameters common to the party and key event types
 event_common_type = (
-    "time": date_type,
-    sessions: session_index_or_list_type,
-    party: party_index_type,
+    "time": date_type,                       ; Section 4.3.2
+    sessions: session_index_or_list_type,    ; Section 4.3.3
+    party: party_index_type,                 ; Section 4.3.4
     ; dialog SHOULD NOT be present
-    ? dialog: dialog_index_type
+    ? dialog: dialog_index_type              ; Section 4.3.5
   )
 
 ; Parameters common to the transfer event types
 ; sessions is a single index which references the Session Object
 ; for the original call, and party references the Transferor.
 event_transfer_common_type = (
-    "time": date_type,
-    sessions: session_index_type,
-    party: party_index_type,
+    "time": date_type,                       ; Section 4.3.2
+    sessions: session_index_type,            ; Section 4.3.3
+    party: party_index_type,                 ; Section 4.3.4
     ; dialog SHOULD NOT be present
-    ? dialog: dialog_index_type
+    ? dialog: dialog_index_type              ; Section 4.3.5
   )
 
-; Party event types
+; Party event types (Section 4.3.1.1)
 event_party_type = (
+    ; Section 4.3.1
     type: "join" / "drop" / "hold" / "unhold" / "mute" / "unmute",
     event_common_type
   )
 
-; Key event types
+; Key event types (Section 4.3.1.2)
 event_key_type = (
-    type: "keydown" / "keyup",
+    type: "keydown" / "keyup",               ; Section 4.3.1
     event_common_type,
-    button: tstr
+    button: tstr                             ; Section 4.3.8
   )
 
-; Transfer event types
+; Transfer event types (Section 4.3.1.3)
 ; transferee and transfer_target reference Party Objects.
 ; consultation and target_session reference Session Objects.
 event_consultation_start_type = (
-    type: "consultation-start",
+    type: "consultation-start",              ; Section 4.3.1
     event_transfer_common_type,
-    transferee: party_index_type,
-    transfer_target: party_index_type,
-    consultation: session_index_type
+    transferee: party_index_type,            ; Section 4.3.9
+    transfer_target: party_index_type,       ; Section 4.3.10
+    consultation: session_index_type         ; Section 4.3.11
   )
 
 event_blind_transfer_type = (
-    type: "blind-transfer",
+    type: "blind-transfer",                  ; Section 4.3.1
     event_transfer_common_type,
-    transferee: party_index_type,
-    transfer_target: party_index_type,
-    target_session: session_index_type
+    transferee: party_index_type,            ; Section 4.3.9
+    transfer_target: party_index_type,       ; Section 4.3.10
+    target_session: session_index_type       ; Section 4.3.12
   )
 
 event_consultative_transfer_type = (
-    type: "consultative-transfer",
+    type: "consultative-transfer",           ; Section 4.3.1
     event_transfer_common_type,
-    transferee: party_index_type,
-    transfer_target: party_index_type,
-    consultation: session_index_type,
-    target_session: session_index_type
+    transferee: party_index_type,            ; Section 4.3.9
+    transfer_target: party_index_type,       ; Section 4.3.10
+    consultation: session_index_type,        ; Section 4.3.11
+    target_session: session_index_type       ; Section 4.3.12
   )
 
 event_transfer_abandoned_type = (
-    type: "transfer-abandoned",
+    type: "transfer-abandoned",              ; Section 4.3.1
     event_transfer_common_type,
-    transferee: party_index_type,
-    ? transfer_target: party_index_type,
-    ? consultation: session_index_type
+    transferee: party_index_type,            ; Section 4.3.9
+    ? transfer_target: party_index_type,     ; Section 4.3.10
+    ? consultation: session_index_type       ; Section 4.3.11
   )
 
-; Channel contributors event type
+; Channel contributors event type (Section 4.3.1.4)
 ; sessions and party MUST NOT be present.  The sessions of the
 ; event are the Session Objects which reference its Dialog
 ; Object.
@@ -286,11 +287,12 @@ event_transfer_abandoned_type = (
 ; - channel MUST be less than the number of channels in the
 ;   recording.
 event_channel_contributors_type = (
-    type: "channel-contributors",
-    "time": date_type,
-    dialog: dialog_index_type,
-    channel: uint,
+    type: "channel-contributors",            ; Section 4.3.1
+    "time": date_type,                       ; Section 4.3.2
+    dialog: dialog_index_type,               ; Section 4.3.5
+    channel: uint,                           ; Section 4.3.6
     ; absent or null: no party contributes to the channel
+    ; Section 4.3.7
     ? contributors: party_index_type / [* party_index_type] /
         null
   )
