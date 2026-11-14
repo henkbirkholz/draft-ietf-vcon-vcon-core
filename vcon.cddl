@@ -297,29 +297,29 @@ event_channel_contributors_type = (
         null
   )
 
-; Party Object
+; Party Object (Section 4.4)
 ; A Party Object with no parameters is permitted.
 party_object_type = {
-    ? tel: tstr,
-    ? sip: tstr,
-    ? stir: tstr,
-    ? mailto: tstr,
-    ? name: tstr,
-    ? did: tstr,
-    ? validation: tstr,
-    ? gmlpos: tstr,
-    ? civicaddress: civicaddress_type,
+    ? tel: tstr,                             ; Section 4.4.1
+    ? sip: tstr,                             ; Section 4.4.2
+    ? stir: tstr,                            ; Section 4.4.3
+    ? mailto: tstr,                          ; Section 4.4.4
+    ? name: tstr,                            ; Section 4.4.5
+    ? did: tstr,                             ; Section 4.4.6
+    ? validation: tstr,                      ; Section 4.4.7
+    ? gmlpos: tstr,                          ; Section 4.4.8
+    ? civicaddress: civicaddress_type,       ; Section 4.4.9
     ; a free form unique identifier for the participant;
-    ; not constrained to UUID syntax
+    ; not constrained to UUID syntax (Section 4.4.10)
     ? uuid: tstr,
     ; type SHOULD be "person", "bot" or "organization"
-    ? type: tstr,
-    ? org: tstr,
-    ? dept: tstr,
+    ? type: tstr,                            ; Section 4.4.11
+    ? org: tstr,                             ; Section 4.4.12
+    ? dept: tstr,                            ; Section 4.4.13
     * $$party-ext
   }
 
-; Civicaddress Object
+; Civicaddress Object (Section 4.4.9)
 civicaddress_type = {
     ? country: tstr,
     ? a1: tstr,
