@@ -443,7 +443,7 @@ attachment_object_type = {
     * $$attachment-ext
   }
 
-; Analysis Object
+; Analysis Object (Section 4.7)
 ; At least one of dialog, sessions, attachment or analysis SHOULD
 ; be present.
 ; An Analysis Object MUST NOT reference itself in the analysis
@@ -451,21 +451,21 @@ attachment_object_type = {
 analysis_object_type = {
     ; type SHOULD be one of: "report", "sentiment", "summary",
     ; "transcript", "translation", "tts"
-    type: tstr,
-    ? dialog: dialog_index_or_list_type,
-    ? sessions: session_index_or_list_type,
-    ? attachment: attachment_index_or_list_type,
-    ? analysis: analysis_index_or_list_type,
+    type: tstr,                              ; Section 4.7.1
+    ? dialog: dialog_index_or_list_type,     ; Section 4.7.2
+    ? sessions: session_index_or_list_type,  ; Section 4.7.3
+    ? attachment: attachment_index_or_list_type, ; Section 4.7.4
+    ? analysis: analysis_index_or_list_type, ; Section 4.7.5
     ; mediatype SHOULD be present for inline content; when no
     ; media type is defined for the analysis data format, the
     ; vendor, product and schema parameters SHOULD identify the
     ; format instead
-    ? mediatype: media_type_value_type,
-    ? filename: tstr,
-    vendor: tstr,
-    ? product: tstr,
-    ? schema: tstr,
-    ; Analysis Content SHOULD be present;
+    ? mediatype: media_type_value_type,      ; Section 4.7.6
+    ? filename: tstr,                        ; Section 4.7.7
+    vendor: tstr,                            ; Section 4.7.8
+    ? product: tstr,                         ; Section 4.7.9
+    ? schema: tstr,                          ; Section 4.7.10
+    ; Analysis Content (Section 4.7.11) SHOULD be present;
     ; body or url MAY be absent if redacted
     ? file_content_type,
     * $$analysis-ext
