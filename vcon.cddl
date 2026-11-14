@@ -341,9 +341,9 @@ civicaddress_type = {
     * $$civicaddress-ext
   }
 
-; Dialog Object
+; Dialog Object (Section 4.5)
 ; The type selects which parameters apply (see Dialog Object
-; Parameter Applicability by Type).
+; Parameter Applicability by Type in Section 4.5.1.4).
 ; A placeholder Dialog Object contains only the type parameter and,
 ; for the "incomplete" type, the required disposition parameter.
 ; A placeholder Dialog Object MUST be of type "recording" if the
@@ -366,20 +366,20 @@ empty_dialog_object_type = {}
 ; Parameters common to all Dialog Object types
 dialog_common_type = (
     ; start SHOULD be present; MAY be omitted if not known
-    ? start: date_type,
-    ? duration: duration_type,
-    ? session_id: session_id_parameter_type,
-    ? application: tstr
+    ? start: date_type,                      ; Section 4.5.2
+    ? duration: duration_type,               ; Section 4.5.3
+    ? session_id: session_id_parameter_type, ; Section 4.5.9
+    ? application: tstr                      ; Section 4.5.10
   )
 
 dialog_recording_type = (
-    type: "recording",
+    type: "recording",                       ; Section 4.5.1
     dialog_common_type,
     dialog_media_based_type
   )
 
 dialog_text_type = (
-    type: "text",
+    type: "text",                            ; Section 4.5.1
     dialog_common_type,
     dialog_media_based_type
   )
@@ -387,23 +387,24 @@ dialog_text_type = (
 ; Parameters of the "recording" and "text" type Dialog Objects
 dialog_media_based_type = (
     ; parties SHOULD be present
-    ? parties: dialog_parties_type,
+    ? parties: dialog_parties_type,          ; Section 4.5.4
     ; mediatype MUST be present for inline content; not required
     ; when Dialog Content is absent
-    ? mediatype: media_type_value_type,
-    ? filename: tstr,
-    ? message_id: tstr,
+    ? mediatype: media_type_value_type,      ; Section 4.5.5
+    ? filename: tstr,                        ; Section 4.5.6
+    ? message_id: tstr,                      ; Section 4.5.11
     ; disposition SHOULD NOT be present
-    ? disposition: disposition_value_type,
+    ? disposition: disposition_value_type,   ; Section 4.5.8
     ; redacted_segments SHOULD NOT be present in "text" type
     ; Dialog Objects
+    ; Section 4.5.12
     ? redacted_segments: [* redacted_segments_object_type],
-    ; Dialog Content SHOULD be present;
+    ; Dialog Content (Section 4.5.7) SHOULD be present;
     ; body or url MAY be absent if redacted
     ? file_content_type
   )
 
-; Redacted_segments Object
+; Redacted_segments Object (Section 4.5.12.1)
 ; TODO: should use duration instead of end?
 redacted_segments_object_type = {
     start: date_type,
@@ -416,11 +417,11 @@ redacted_segments_object_type = {
 ; Content MUST NOT be present in "incomplete" type Dialog
 ; Objects.
 dialog_incomplete_type = (
-    type: "incomplete",
+    type: "incomplete",                      ; Section 4.5.1
     dialog_common_type,
-    ? parties: dialog_parties_type,
+    ? parties: dialog_parties_type,          ; Section 4.5.4
     ; "failed" SHOULD be used when the reason is not known
-    disposition: disposition_value_type
+    disposition: disposition_value_type      ; Section 4.5.8
   )
 
 ; Attachment Object
