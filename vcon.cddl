@@ -622,8 +622,8 @@ signed_header_object_type = {
     * tstr => any
   }
 
-; Encrypted Form of vCon Object
-;______________________________
+; Encrypted Form of vCon Object (Section 6.3)
+;____________________________________________
 
 ; Not enforced by this CDDL, as the JWE Protected Header is an
 ; opaque string here:
@@ -644,7 +644,7 @@ encrypted_vcon_type = {
     * $$encrypted-ext
   }
 
-; Unprotected Object
+; Unprotected Object (Section 6.3.1)
 ; Other JWE header parameters MAY be present.
 unprotected_object_type = {
     ; cty SHOULD be "application/vcon" or "application/vcon+gzip"
@@ -656,7 +656,7 @@ unprotected_object_type = {
     * tstr => any
   }
 
-; Recipient Object
+; Recipient Object (Section 6.3.2)
 ; A Recipient Object with no parameters is permitted.
 recipient_object_type = {
     ? header: recipient_header_object_type,
@@ -665,7 +665,7 @@ recipient_object_type = {
     * $$recipient-ext
   }
 
-; Header Object of a recipient in the encrypted form
+; Header Object of a recipient in the encrypted form (Section 6.3.3)
 ; Other JWE header parameters MAY be present.
 recipient_header_object_type = {
     ? alg: tstr,                             ; SHOULD be "RSA-OAEP"
