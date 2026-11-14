@@ -152,36 +152,37 @@ redacted_string_object_type = {
     * $$redacted-string-ext
   }
 
-; Session Object
+; Session Object (Section 4.2)
 ; A Session Object with no parameters is permitted.
 ; start and duration define the time period of the session,
 ; which need not include the entire time period of its Dialog
 ; and Event Objects.
 session_object_type = {
     ; start SHOULD be present
-    ? start: date_type,
-    ? duration: duration_type,
+    ? start: date_type,                      ; Section 4.2.1
+    ? duration: duration_type,               ; Section 4.2.2
     ; parties SHOULD be present; the first party is the implied
     ; originator of the session
-    ? parties: [* party_index_type],
+    ? parties: [* party_index_type],         ; Section 4.2.3
     ; only provided if the first party in parties is not the
     ; originator
-    ? originator: party_index_type,
+    ? originator: party_index_type,          ; Section 4.2.4
     ; a single SessionId Object
-    ? session_id: session_id_object_type,
-    ? sessions: [* session_reference_object_type],
-    ? dialog: [* dialog_index_type],
+    ? session_id: session_id_object_type,    ; Section 4.2.5
+    ? sessions: [* session_reference_object_type], ; Section 4.2.6
+    ? dialog: [* dialog_index_type],         ; Section 4.2.7
     * $$session-ext
   }
 
-; Session_Reference Object
+; Session_Reference Object (Section 4.2.8)
 session_reference_object_type = {
-    session: session_index_type,
-    type: session_reference_type_value_type,
-    ? description: tstr,
+    session: session_index_type,             ; Section 4.2.8.1
+    type: session_reference_type_value_type, ; Section 4.2.8.2
+    ? description: tstr,                     ; Section 4.2.8.3
     * $$session-reference-ext
   }
 
+; Session_Reference Object type values (Section 4.2.8.2)
 session_reference_type_value_type = "child" / "peer" /
     "precursor" / "breakout" / $session-reference-type-ext
 
