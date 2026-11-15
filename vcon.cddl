@@ -510,7 +510,8 @@ redacted_content_type = (
 ; The empty object is the placeholder for a party with no session id.
 session_id_object_type = {
     ? "local": uuid_value_type,
-    ? "remote": uuid_value_type
+    ? "remote": uuid_value_type,
+    * $$session-id-ext
   }
 
 session_id_parameter_type =
