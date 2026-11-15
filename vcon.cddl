@@ -26,7 +26,7 @@
 ; A vCon extension adds parameters to that Object only, with for
 ; example:
 ;
-;     $$party-ext //= ( ? example_parameter: tstr )
+;     $$party-ext //= ( example_parameter: tstr )
 ;
 ; The "*" before each of these sockets allows the socket to match
 ; nothing, so that this CDDL can be used with no extensions, and
